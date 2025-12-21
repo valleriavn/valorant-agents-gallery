@@ -1,0 +1,910 @@
+:root {
+  --valorant-red: #ff4655;
+  --valorant-black: #0f1923;
+  --valorant-gray: #ece8e1;
+  --valorant-white: #ffffff;
+  --duelist-color: #ff4655;
+  --initiator-color: #1cffc9;
+  --controller-color: #8d8df0;
+  --sentinel-color: #ffd166;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--valorant-black);
+  color: var(--valorant-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+a,
+label,
+.form-control,
+.btn,
+.card,
+.modal-content,
+.navbar,
+.text-muted,
+.lead,
+.modal-body p,
+.ability-desc,
+.ability-name,
+.agent-info p,
+.footer-text {
+  color: var(--valorant-white) !important;
+}
+
+.hero-section {
+  background: linear-gradient(rgba(15, 25, 35, 0.92), rgba(15, 25, 35, 0.92)),
+    url("../img/agents.jpg") center/cover no-repeat fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.header {
+  background: rgba(15, 25, 35, 0.98);
+  border-bottom: 2px solid var(--valorant-red);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.navbar {
+  padding: 1rem 0;
+  width: 100%;
+}
+
+.logo-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.brand-text {
+  font-family: "Tungsten", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.display-1 {
+  font-family: "Tungsten", sans-serif;
+  font-size: 5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.animate-text {
+  animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lead {
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+  opacity: 0.9;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid;
+  border-radius: 12px;
+  padding: 40px 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.7s ease;
+}
+
+.feature-card:hover::before {
+  left: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(255, 70, 85, 0.4);
+}
+
+.feature-card i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.icon-pulse {
+  animation: iconFloat 3s infinite ease-in-out;
+}
+
+@keyframes iconFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.duelist {
+  border-color: var(--duelist-color);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 70, 85, 0.2),
+    rgba(255, 70, 85, 0.05)
+  );
+}
+
+.duelist:hover {
+  box-shadow: 0 20px 40px rgba(255, 70, 85, 0.4);
+}
+
+.initiator {
+  border-color: var(--initiator-color);
+  background: linear-gradient(
+    135deg,
+    rgba(28, 255, 201, 0.2),
+    rgba(28, 255, 201, 0.05)
+  );
+}
+
+.initiator:hover {
+  box-shadow: 0 20px 40px rgba(28, 255, 201, 0.4);
+}
+
+.role-title {
+  font-family: "Tungsten", sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.role-desc {
+  opacity: 0.8;
+  font-size: 1.1rem;
+}
+
+.hero-subtext {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.agent-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.agent-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--valorant-red);
+  box-shadow: 0 15px 30px rgba(255, 70, 85, 0.3);
+}
+
+.agent-img-container {
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 25, 35, 0) 0%,
+    rgba(15, 25, 35, 0.8) 100%
+  );
+  width: 100%;
+}
+
+.agent-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.agent-card:hover .agent-img {
+  transform: scale(1.1);
+}
+
+.agent-info {
+  padding: 20px;
+  background: rgba(15, 25, 35, 0.9);
+  width: 100%;
+}
+
+.agent-name {
+  font-family: "Tungsten", sans-serif;
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+  line-height: 1;
+}
+
+.agent-role {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+}
+
+.search-container {
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.search-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid var(--valorant-red);
+  padding: 15px 25px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  backdrop-filter: blur(10px);
+  width: 100%;
+}
+
+.search-input::placeholder {
+  color: rgba(236, 232, 225, 0.6);
+}
+
+.search-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--valorant-red);
+  box-shadow: 0 0 0 0.25rem rgba(255, 70, 85, 0.25);
+}
+
+.btn-valorant {
+  background: var(--valorant-red);
+  border: none;
+  padding: 12px 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.btn-valorant:hover {
+  background: #ff2a3d;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 70, 85, 0.4);
+}
+
+.btn-outline-valorant {
+  background: transparent;
+  border: 2px solid var(--valorant-red);
+  padding: 10px 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.btn-outline-valorant:hover {
+  background: var(--valorant-red);
+  transform: translateY(-3px);
+}
+
+.modal-content {
+  background-color: var(--valorant-black);
+  border: 2px solid var(--valorant-red);
+  border-radius: 12px;
+  width: 95%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 70, 85, 0.3);
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.modal-title {
+  font-family: "Tungsten", sans-serif;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.modal-title-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 70, 85, 0.1);
+  flex-shrink: 0;
+}
+
+.btn-close {
+  filter: invert(1) brightness(2);
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.modal-body h5 {
+  color: var(--valorant-red) !important;
+}
+
+.agent-role-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.agent-role-icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.agent-role-tag {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: var(--valorant-black);
+  flex-shrink: 0;
+}
+
+.abilities-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.ability-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  border-left: 4px solid var(--valorant-red);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.ability-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.ability-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ability-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 70, 85, 0.1);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.ability-icon img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.ability-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex: 1;
+  min-width: 150px;
+}
+
+.ability-desc {
+  opacity: 0.9;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  flex: 1;
+  min-height: 60px;
+}
+
+.ability-slot {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 70, 85, 0.2);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--valorant-red) !important;
+  margin-top: 10px;
+  align-self: flex-start;
+}
+
+.page-container {
+  background-color: var(--valorant-black);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page-title {
+  font-family: "Tungsten", sans-serif;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.page-subtitle {
+  opacity: 0.8;
+  font-size: 1.2rem;
+}
+
+.footer {
+  background: rgba(15, 25, 35, 0.98);
+  border-top: 2px solid var(--valorant-red);
+  padding: 1.5rem 0;
+  font-size: 1rem;
+  margin-top: auto;
+  width: 100%;
+}
+
+.footer-text {
+  opacity: 0.7;
+  text-align: center;
+  margin: 0;
+}
+
+.spinner-border.text-danger {
+  color: var(--valorant-red) !important;
+}
+
+.text-muted {
+  opacity: 0.6;
+}
+
+.alert-info {
+  background-color: rgba(28, 255, 201, 0.1);
+  border-color: var(--initiator-color);
+}
+
+/* Mobile-specific optimizations */
+.mobile-logo {
+  height: 35px !important;
+}
+
+.mobile-brand {
+  font-size: 1.5rem !important;
+  letter-spacing: 1px !important;
+}
+
+.mobile-btn {
+  padding: 8px 15px !important;
+  font-size: 0.9rem !important;
+}
+
+.mobile-text {
+  display: inline-block;
+}
+
+.mobile-input {
+  padding: 12px 15px !important;
+  font-size: 1rem !important;
+}
+
+.mobile-info {
+  font-size: 0.9rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1400px) {
+  .display-1 {
+    font-size: 4.5rem;
+  }
+  .page-title {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .display-1 {
+    font-size: 4rem;
+  }
+  .page-title {
+    font-size: 3rem;
+  }
+  .brand-text {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .display-1 {
+    font-size: 3.5rem;
+  }
+  .page-title {
+    font-size: 2.8rem;
+  }
+  .brand-text {
+    font-size: 1.8rem;
+  }
+  .feature-card {
+    height: 220px;
+    padding: 30px 15px;
+  }
+  .feature-card i {
+    font-size: 2.5rem;
+  }
+  .role-title {
+    font-size: 2rem;
+  }
+  .agent-img-container {
+    height: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  .display-1 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    line-height: 1.1;
+  }
+
+  .brand-text {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+  }
+
+  .mobile-brand {
+    font-size: 1.3rem !important;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .role-title {
+    font-size: 1.6rem;
+    line-height: 1.1;
+  }
+
+  .role-desc {
+    font-size: 0.95rem;
+  }
+
+  .agent-img-container {
+    height: 220px;
+  }
+
+  .feature-card {
+    height: 180px;
+    padding: 20px 15px;
+    max-width: 100%;
+  }
+
+  .feature-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .agent-card {
+    max-width: 100%;
+  }
+
+  .agent-name {
+    font-size: 1.8rem;
+  }
+
+  .modal-title {
+    font-size: 1.8rem;
+  }
+
+  .modal-title-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+
+  .agent-role-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+  }
+
+  .agent-role-tag {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  .abilities-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ability-card {
+    padding: 15px;
+    min-height: 130px;
+  }
+
+  .mobile-text {
+    display: none;
+  }
+
+  .mobile-btn {
+    padding: 6px 10px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .mobile-btn i {
+    margin-right: 0 !important;
+  }
+
+  .mobile-logo {
+    height: 30px !important;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .modal-body {
+    padding: 15px;
+  }
+
+  .modal-header {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 13px;
+  }
+
+  .display-1 {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+
+  .page-title {
+    font-size: 1.8rem;
+  }
+
+  .brand-text {
+    font-size: 1.2rem;
+  }
+
+  .mobile-brand {
+    font-size: 1.1rem !important;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .feature-card {
+    height: 160px;
+    padding: 15px 10px;
+  }
+
+  .feature-card i {
+    font-size: 1.8rem;
+  }
+
+  .role-title {
+    font-size: 1.4rem;
+  }
+
+  .agent-img-container {
+    height: 200px;
+  }
+
+  .agent-name {
+    font-size: 1.6rem;
+  }
+
+  .agent-info {
+    padding: 15px;
+  }
+
+  .search-input {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+
+  .btn-valorant,
+  .btn-outline-valorant {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .hero-content {
+    padding: 1rem 0;
+  }
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .modal-dialog {
+    margin: 10px;
+  }
+
+  .modal-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 375px) {
+  .display-1 {
+    font-size: 1.8rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .brand-text {
+    font-size: 1rem;
+  }
+
+  .mobile-brand {
+    font-size: 0.9rem !important;
+  }
+
+  .feature-card {
+    height: 150px;
+  }
+
+  .feature-card i {
+    font-size: 1.5rem;
+  }
+
+  .role-title {
+    font-size: 1.2rem;
+  }
+
+  .agent-img-container {
+    height: 180px;
+  }
+
+  .agent-name {
+    font-size: 1.4rem;
+  }
+}

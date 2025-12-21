@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Valorant Agents</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tungsten:wght@500;700&family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body>
+    <div class="hero-section">
+      <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid">
+            <div class="d-flex align-items-center">
+              <img
+                src="assets/img/logo.jpg"
+                alt="Valorant Logo"
+                height="45"
+                class="d-inline-block align-text-top me-2 logo-pulse mobile-logo"
+              />
+              <span class="brand-text text-white">VALORANT AGENTS</span>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <div class="hero-content">
+        <div class="container">
+          <div class="text-center py-5">
+            <h1 class="display-1 hero-title animate-text text-white">
+              CHOOSE YOUR AGENT
+            </h1>
+            <p class="lead hero-lead text-white">View agents and learn them!</p>
+
+            <div class="row mt-5 justify-content-center">
+              <div class="col-12 col-md-5 mb-4">
+                <a href="agents.html" class="text-decoration-none">
+                  <div class="card feature-card duelist hover-glow">
+                    <div
+                      class="card-body text-center d-flex flex-column justify-content-center text-white"
+                    >
+                      <i
+                        class="bi bi-grid-3x3-gap-fill mb-3 icon-pulse text-white"
+                      ></i>
+                      <h2 class="role-title text-white">AGENTS GALLERY</h2>
+                      <p class="role-desc text-white">View all agents</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-12 col-md-5 mb-4">
+                <a href="search.html" class="text-decoration-none">
+                  <div class="card feature-card initiator hover-glow">
+                    <div
+                      class="card-body text-center d-flex flex-column justify-content-center text-white"
+                    >
+                      <i class="bi bi-search mb-3 icon-pulse text-white"></i>
+                      <h2 class="role-title text-white">SEARCH AGENTS</h2>
+                      <p class="role-desc text-white">
+                        Find specific agents or role
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <p class="hero-subtext text-white">
+                Current Agents:
+                <span id="agentCount" class="text-white">24</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        try {
+          const response = await fetch(
+            "https://valorant-api.com/v1/agents?isPlayableCharacter=true"
+          );
+          const data = await response.json();
+          document.getElementById("agentCount").textContent = data.data.length;
+        } catch (error) {
+          console.error("Error fetching agent count:", error);
+        }
+      });
+    </script>
+  </body>
+</html>

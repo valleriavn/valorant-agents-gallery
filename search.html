@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>Valorant Agents - Search</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tungsten:wght@500;700&family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body class="page-container">
+    <header class="header">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <div class="d-flex align-items-center">
+            <img
+              src="assets/img/logo.jpg"
+              alt="Valorant Logo"
+              height="45"
+              class="d-inline-block align-text-top me-2 mobile-logo"
+            />
+            <span class="brand-text text-white mobile-brand"
+              >VALORANT AGENTS</span
+            >
+          </div>
+          <div class="ms-auto">
+            <a
+              href="index.html"
+              class="btn btn-valorant me-2 text-white mobile-btn"
+            >
+              <i class="bi bi-house-door me-2"></i
+              ><span class="mobile-text">Home</span>
+            </a>
+            <a
+              href="agents.html"
+              class="btn btn-outline-valorant text-white mobile-btn"
+            >
+              <i class="bi bi-grid-3x3-gap-fill me-2"></i
+              ><span class="mobile-text">Gallery</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container py-5">
+      <div class="row mb-5">
+        <div class="col-md-8 mx-auto">
+          <h1 class="page-title text-center mb-4 text-white">SEARCH AGENTS</h1>
+
+          <div class="search-container">
+            <div class="input-group mb-4">
+              <input
+                type="text"
+                class="form-control search-input mobile-input"
+                id="searchInput"
+                placeholder="Search by name, role, or ability..."
+              />
+              <button
+                class="btn btn-valorant text-white mobile-btn"
+                type="button"
+                id="searchBtn"
+              >
+                <i class="bi bi-search me-2"></i
+                ><span class="mobile-text">Search</span>
+              </button>
+            </div>
+            <p class="text-center text-white mobile-info">
+              <i class="bi bi-info-circle me-2"></i>
+              Search for agents by name (e.g., "Jett"), role (e.g., "Duelist"),
+              or description
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="contentArea"></div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-text text-white">
+          All data used are from Valorant API.
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+  </body>
+</html>
