@@ -1,7 +1,6 @@
 :root {
   --valorant-red: #ff4655;
   --valorant-black: #0f1923;
-  --valorant-gray: #ece8e1;
   --valorant-white: #ffffff;
   --duelist-color: #ff4655;
   --initiator-color: #1cffc9;
@@ -54,6 +53,40 @@ label,
 .agent-info p,
 .footer-text {
   color: var(--valorant-white) !important;
+}
+
+#progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  z-index: 9999;
+  display: none;
+}
+
+#progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #ff4655, #ff7b85, #ff4655);
+  width: 0%;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 70, 85, 0.5);
+}
+
+.progress-bar-loading {
+  display: block !important;
+  animation: progressBarPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes progressBarPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(255, 70, 85, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 70, 85, 0.8);
+  }
 }
 
 .hero-section {
@@ -590,7 +623,6 @@ label,
   border-color: var(--initiator-color);
 }
 
-/* Mobile-specific optimizations */
 .mobile-logo {
   height: 35px !important;
 }
@@ -619,7 +651,6 @@ label,
   line-height: 1.4 !important;
 }
 
-/* Responsive breakpoints */
 @media (max-width: 1400px) {
   .display-1 {
     font-size: 4.5rem;
@@ -670,122 +701,100 @@ label,
   html {
     font-size: 14px;
   }
-
   .display-1 {
     font-size: 2.8rem;
     line-height: 1.1;
     margin-bottom: 0.5rem;
   }
-
   .page-title {
     font-size: 2.2rem;
     line-height: 1.1;
   }
-
   .brand-text {
     font-size: 1.5rem;
     letter-spacing: 1px;
   }
-
   .mobile-brand {
     font-size: 1.3rem !important;
   }
-
   .lead {
     font-size: 1.1rem;
     margin-bottom: 2rem;
   }
-
   .role-title {
     font-size: 1.6rem;
     line-height: 1.1;
   }
-
   .role-desc {
     font-size: 0.95rem;
   }
-
   .agent-img-container {
     height: 220px;
   }
-
   .feature-card {
     height: 180px;
     padding: 20px 15px;
     max-width: 100%;
   }
-
   .feature-card i {
     font-size: 2rem;
     margin-bottom: 0.5rem;
   }
-
   .agent-card {
     max-width: 100%;
   }
-
   .agent-name {
     font-size: 1.8rem;
   }
-
   .modal-title {
     font-size: 1.8rem;
   }
-
   .modal-title-icon {
     width: 45px;
     height: 45px;
     font-size: 1.5rem;
     margin-right: 10px;
   }
-
   .agent-role-icon {
     width: 45px;
     height: 45px;
     font-size: 1.5rem;
   }
-
   .agent-role-tag {
     padding: 8px 15px;
     font-size: 0.9rem;
   }
-
   .abilities-container {
     grid-template-columns: 1fr;
     gap: 10px;
   }
-
   .ability-card {
     padding: 15px;
     min-height: 130px;
   }
-
   .mobile-text {
     display: none;
   }
-
   .mobile-btn {
     padding: 6px 10px !important;
     font-size: 0.8rem !important;
   }
-
   .mobile-btn i {
     margin-right: 0 !important;
   }
-
   .mobile-logo {
     height: 30px !important;
   }
-
+  #progress-bar-container {
+    height: 3px;
+  }
   .modal-content {
     width: 95%;
     margin: 10px auto;
   }
-
   .modal-body {
     padding: 15px;
   }
-
   .modal-header {
     padding: 15px;
   }
@@ -795,77 +804,63 @@ label,
   html {
     font-size: 13px;
   }
-
   .display-1 {
     font-size: 2.2rem;
     letter-spacing: 2px;
   }
-
   .page-title {
     font-size: 1.8rem;
   }
-
   .brand-text {
     font-size: 1.2rem;
   }
-
   .mobile-brand {
     font-size: 1.1rem !important;
   }
-
   .lead {
     font-size: 1rem;
   }
-
   .feature-card {
     height: 160px;
     padding: 15px 10px;
   }
-
   .feature-card i {
     font-size: 1.8rem;
   }
-
   .role-title {
     font-size: 1.4rem;
   }
-
   .agent-img-container {
     height: 200px;
   }
-
   .agent-name {
     font-size: 1.6rem;
   }
-
   .agent-info {
     padding: 15px;
   }
-
   .search-input {
     padding: 12px 15px;
     font-size: 1rem;
   }
-
   .btn-valorant,
   .btn-outline-valorant {
     padding: 10px 15px;
     font-size: 0.9rem;
   }
-
   .hero-content {
     padding: 1rem 0;
   }
-
   .container {
     padding-left: 15px;
     padding-right: 15px;
   }
-
+  #progress-bar-container {
+    height: 2px;
+  }
   .modal-dialog {
     margin: 10px;
   }
-
   .modal-content {
     width: 100%;
   }
@@ -875,35 +870,27 @@ label,
   .display-1 {
     font-size: 1.8rem;
   }
-
   .page-title {
     font-size: 1.5rem;
   }
-
   .brand-text {
     font-size: 1rem;
   }
-
   .mobile-brand {
     font-size: 0.9rem !important;
   }
-
   .feature-card {
     height: 150px;
   }
-
   .feature-card i {
     font-size: 1.5rem;
   }
-
   .role-title {
     font-size: 1.2rem;
   }
-
   .agent-img-container {
     height: 180px;
   }
-
   .agent-name {
     font-size: 1.4rem;
   }

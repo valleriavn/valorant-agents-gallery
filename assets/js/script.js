@@ -12,6 +12,68 @@ const roleIcons = {
   Sentinel: "bi-shield-fill",
 };
 
+const ProgressBar = {
+  container: null,
+  bar: null,
+
+  init: function () {
+    this.container = document.getElementById("progress-bar-container");
+    this.bar = document.getElementById("progress-bar");
+    if (!this.container || !this.bar) this.createProgressBar();
+  },
+
+  createProgressBar: function () {
+    this.container = document.createElement("div");
+    this.container.id = "progress-bar-container";
+    this.bar = document.createElement("div");
+    this.bar.id = "progress-bar";
+    this.container.appendChild(this.bar);
+    document.body.prepend(this.container);
+  },
+
+  show: function () {
+    if (!this.container || !this.bar) this.init();
+    this.container.style.display = "block";
+    this.container.classList.add("progress-bar-loading");
+  },
+
+  hide: function () {
+    if (!this.container || !this.bar) this.init();
+    setTimeout(() => {
+      this.container.style.display = "none";
+      this.container.classList.remove("progress-bar-loading");
+      this.bar.style.width = "0%";
+    }, 300);
+  },
+
+  update: function (percent) {
+    if (!this.container || !this.bar) this.init();
+    this.bar.style.width = percent + "%";
+  },
+
+  simulatePageLoad: function () {
+    this.show();
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 10;
+      if (progress >= 90) {
+        progress = 90;
+        clearInterval(interval);
+      }
+      this.update(progress);
+    }, 100);
+    return interval;
+  },
+
+  complete: function (interval) {
+    if (interval) clearInterval(interval);
+    this.update(100);
+    setTimeout(() => {
+      this.hide();
+    }, 500);
+  },
+};
+
 async function fetchAgents() {
   try {
     const response = await fetch(
@@ -32,27 +94,28 @@ function createAgentCard(agent) {
 
   return `
     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
-      <div class="agent-card" onclick="showAgentDetails('${agent.uuid}')">
-        <div class="agent-img-container">
-          <img src="${agent.fullPortrait || agent.displayIcon}" 
-               alt="${agent.displayName}" 
-               class="agent-img"
-               onerror="this.src='${placeholder}'">
-        </div>
-        <div class="agent-info">
-          <h3 class="agent-name">${agent.displayName}</h3>
-          <div class="d-flex align-items-center">
-            <i class="bi ${roleIcon} me-2" style="color: ${roleColor}"></i>
-            <p class="agent-role m-0" style="color: ${roleColor}">${
+        <div class="agent-card" onclick="showAgentDetails('${agent.uuid}')">
+            <div class="agent-img-container">
+                <img src="${agent.fullPortrait || agent.displayIcon}" 
+                     alt="${agent.displayName}" 
+                     class="agent-img"
+                     onerror="this.src='${placeholder}'">
+            </div>
+            <div class="agent-info">
+                <h3 class="agent-name">${agent.displayName}</h3>
+                <div class="d-flex align-items-center">
+                    <i class="bi ${roleIcon} me-2" style="color: ${roleColor}"></i>
+                    <p class="agent-role m-0" style="color: ${roleColor}">${
     agent.role.displayName
   }</p>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>`;
 }
 
 async function showAgentDetails(agentUuid) {
+  const progressInterval = ProgressBar.simulatePageLoad();
   try {
     const response = await fetch(
       `https://valorant-api.com/v1/agents/${agentUuid}`
@@ -89,81 +152,88 @@ async function showAgentDetails(agentUuid) {
               : "ABILITY";
 
           abilitiesHtml += `
-            <div class="ability-card">
-              <div class="ability-header">
-                <div class="ability-icon">
-                  <img src="${ability.displayIcon || ""}" alt="${
+                    <div class="ability-card">
+                        <div class="ability-header">
+                            <div class="ability-icon">
+                                <img src="${ability.displayIcon || ""}" alt="${
             ability.displayName
           }" onerror="this.style.display='none'">
-                </div>
-                <div class="ability-name">${ability.displayName}</div>
-              </div>
-              <div class="ability-desc">${ability.description}</div>
-              <div class="ability-slot">${slotName}</div>
-            </div>`;
+                            </div>
+                            <div class="ability-name">${
+                              ability.displayName
+                            }</div>
+                        </div>
+                        <div class="ability-desc">${ability.description}</div>
+                        <div class="ability-slot">${slotName}</div>
+                    </div>`;
         }
       });
       abilitiesHtml += "</div>";
     }
 
     const modalHtml = `
-      <div class="modal fade" id="agentModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">
-                <div class="modal-title-icon" style="background-color: ${roleColor}20; border: 2px solid ${roleColor}">
-                  <i class="bi ${roleIcon}" style="color: ${roleColor}"></i>
-                </div>
-                ${agent.displayName}
-              </h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-md-5">
-                  <img src="${agent.fullPortrait || agent.displayIcon}" 
-                       alt="${agent.displayName}" 
-                       class="img-fluid rounded mb-3"
-                       style="border: 2px solid ${roleColor}"
-                       onerror="this.src='${placeholder}'">
-                  <div class="agent-role-container">
-                    <div class="agent-role-icon" style="color: ${roleColor}; border: 2px solid ${roleColor}">
-                      <i class="bi ${roleIcon}"></i>
+        <div class="modal fade" id="agentModal" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <div class="modal-title-icon" style="background-color: ${roleColor}20; border: 2px solid ${roleColor}">
+                                <i class="bi ${roleIcon}" style="color: ${roleColor}"></i>
+                            </div>
+                            ${agent.displayName}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <div class="agent-role-tag" style="background-color: ${roleColor}">${
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <img src="${
+                                  agent.fullPortrait || agent.displayIcon
+                                }" 
+                                     alt="${agent.displayName}" 
+                                     class="img-fluid rounded mb-3"
+                                     style="border: 2px solid ${roleColor}"
+                                     onerror="this.src='${placeholder}'">
+                                <div class="agent-role-container">
+                                    <div class="agent-role-icon" style="color: ${roleColor}; border: 2px solid ${roleColor}">
+                                        <i class="bi ${roleIcon}"></i>
+                                    </div>
+                                    <div class="agent-role-tag" style="background-color: ${roleColor}">${
       agent.role.displayName
     }</div>
-                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <h5 style="color: var(--valorant-red)">Description</h5>
+                                <p class="mb-4">${
+                                  agent.description ||
+                                  "No description available."
+                                }</p>
+                                <h5 style="color: var(--valorant-red)">Biography</h5>
+                                <p class="mb-4">${
+                                  agent.developerName ||
+                                  "No biography available."
+                                }</p>
+                                <h5 style="color: var(--valorant-red)">Abilities</h5>
+                                ${
+                                  abilitiesHtml ||
+                                  '<p class="text-muted">No abilities information available.</p>'
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-7">
-                  <h5 style="color: var(--valorant-red)">Description</h5>
-                  <p class="mb-4">${
-                    agent.description || "No description available."
-                  }</p>
-                  <h5 style="color: var(--valorant-red)">Biography</h5>
-                  <p class="mb-4">${
-                    agent.developerName || "No biography available."
-                  }</p>
-                  <h5 style="color: var(--valorant-red)">Abilities</h5>
-                  ${
-                    abilitiesHtml ||
-                    '<p class="text-muted">No abilities information available.</p>'
-                  }
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>`;
+        </div>`;
 
     const existingModal = document.getElementById("agentModal");
     if (existingModal) existingModal.remove();
-
     document.body.insertAdjacentHTML("beforeend", modalHtml);
     new bootstrap.Modal(document.getElementById("agentModal")).show();
+    ProgressBar.complete(progressInterval);
   } catch (error) {
     console.error("Error fetching agent details:", error);
+    ProgressBar.complete(progressInterval);
     alert("Error loading agent details. Please try again.");
   }
 }
@@ -171,36 +241,37 @@ async function showAgentDetails(agentUuid) {
 async function initializeAgentsPage() {
   const contentArea = document.getElementById("contentArea");
   if (!contentArea) return;
-
+  const progressInterval = ProgressBar.simulatePageLoad();
   contentArea.innerHTML = `
     <div class="col-12">
-      <div class="text-center py-5">
-        <div class="spinner-border text-danger" role="status" style="width: 3rem; height: 3rem;"></div>
-        <p class="mt-3">Loading agents...</p>
-      </div>
+        <div class="text-center py-5">
+            <div class="spinner-border text-danger" role="status" style="width: 3rem; height: 3rem;"></div>
+            <p class="mt-3">Loading agents...</p>
+        </div>
     </div>`;
 
   try {
     const agents = await fetchAgents();
     agents.sort((a, b) => a.displayName.localeCompare(b.displayName));
     contentArea.innerHTML = "";
-
     if (agents.length === 0) {
       contentArea.innerHTML = `
-        <div class="col-12">
-          <div class="alert alert-info text-center">No agents found. Please try again later.</div>
-        </div>`;
+            <div class="col-12">
+                <div class="alert alert-info text-center">No agents found. Please try again later.</div>
+            </div>`;
+      ProgressBar.complete(progressInterval);
       return;
     }
-
     agents.forEach((agent) => {
       contentArea.innerHTML += createAgentCard(agent);
     });
+    ProgressBar.complete(progressInterval);
   } catch (error) {
     contentArea.innerHTML = `
-      <div class="col-12">
-        <div class="alert alert-info text-center">Error loading agents. Please check your connection.</div>
-      </div>`;
+        <div class="col-12">
+            <div class="alert alert-info text-center">Error loading agents. Please check your connection.</div>
+        </div>`;
+    ProgressBar.complete(progressInterval);
   }
 }
 
@@ -208,38 +279,37 @@ async function initializeSearchPage() {
   const contentArea = document.getElementById("contentArea");
   const searchInput = document.getElementById("searchInput");
   const searchBtn = document.getElementById("searchBtn");
-
   if (!contentArea) return;
-
+  const progressInterval = ProgressBar.simulatePageLoad();
   let allAgents = [];
 
   try {
     allAgents = await fetchAgents();
     allAgents.sort((a, b) => a.displayName.localeCompare(b.displayName));
     contentArea.innerHTML = "";
-
     if (allAgents.length === 0) {
       contentArea.innerHTML = `
-        <div class="col-12">
-          <div class="alert alert-info text-center">No agents available. Please try again later.</div>
-        </div>`;
+            <div class="col-12">
+                <div class="alert alert-info text-center">No agents available. Please try again later.</div>
+            </div>`;
+      ProgressBar.complete(progressInterval);
       return;
     }
-
     allAgents.forEach((agent) => {
       contentArea.innerHTML += createAgentCard(agent);
     });
+    ProgressBar.complete(progressInterval);
   } catch (error) {
     contentArea.innerHTML = `
-      <div class="col-12">
-        <div class="alert alert-info text-center">Error loading agents. Please check your connection.</div>
-      </div>`;
+        <div class="col-12">
+            <div class="alert alert-info text-center">Error loading agents. Please check your connection.</div>
+        </div>`;
+    ProgressBar.complete(progressInterval);
   }
 
   function performSearch() {
     if (!searchInput) return;
     const searchTerm = searchInput.value.toLowerCase().trim();
-
     if (searchTerm === "") {
       contentArea.innerHTML = "";
       allAgents.forEach((agent) => {
@@ -247,7 +317,6 @@ async function initializeSearchPage() {
       });
       return;
     }
-
     const filteredAgents = allAgents.filter(
       (agent) =>
         agent.displayName.toLowerCase().includes(searchTerm) ||
@@ -257,20 +326,17 @@ async function initializeSearchPage() {
         (agent.description &&
           agent.description.toLowerCase().includes(searchTerm))
     );
-
     contentArea.innerHTML = "";
-
     if (filteredAgents.length === 0) {
       contentArea.innerHTML = `
-        <div class="col-12">
-          <div class="text-center py-5">
-            <h3 style="color: var(--valorant-red)">No agents found</h3>
-            <p class="text-muted">Try searching with a different term</p>
-          </div>
-        </div>`;
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <h3 style="color: var(--valorant-red)">No agents found</h3>
+                    <p class="text-muted">Try searching with a different term</p>
+                </div>
+            </div>`;
       return;
     }
-
     filteredAgents.forEach((agent) => {
       contentArea.innerHTML += createAgentCard(agent);
     });
@@ -283,10 +349,44 @@ async function initializeSearchPage() {
     });
 }
 
+async function fetchAgentCount() {
+  try {
+    const response = await fetch(
+      "https://valorant-api.com/v1/agents?isPlayableCharacter=true"
+    );
+    const data = await response.json();
+    document.getElementById("agentCount").textContent = data.data.length;
+  } catch (error) {
+    console.error("Error fetching agent count:", error);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  ProgressBar.init();
+  const allLinks = document.querySelectorAll("a[href]");
+  allLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      if (
+        this.getAttribute("href").startsWith("#") ||
+        this.getAttribute("href").startsWith("javascript:")
+      )
+        return;
+      if (this.target === "_blank" || this.hasAttribute("download")) return;
+      ProgressBar.show();
+      ProgressBar.simulatePageLoad();
+    });
+  });
+
   const agentCountElement = document.getElementById("agentCount");
   if (agentCountElement) {
-    fetchAgentCount();
+    const progressInterval = ProgressBar.simulatePageLoad();
+    fetchAgentCount()
+      .then(() => {
+        ProgressBar.complete(progressInterval);
+      })
+      .catch(() => {
+        ProgressBar.complete(progressInterval);
+      });
   }
 
   const contentArea = document.getElementById("contentArea");
@@ -299,15 +399,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
-
-async function fetchAgentCount() {
-  try {
-    const response = await fetch(
-      "https://valorant-api.com/v1/agents?isPlayableCharacter=true"
-    );
-    const data = await response.json();
-    document.getElementById("agentCount").textContent = data.data.length;
-  } catch (error) {
-    console.error("Error fetching agent count:", error);
-  }
-}
