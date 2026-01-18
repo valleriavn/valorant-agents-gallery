@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -7,6 +7,8 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <title>Valorant Agents - Gallery</title>
+    <link rel="icon" href="assets/img/logo.png" type="image/png" />
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,56 +25,60 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
     />
   </head>
-  <body class="page-container">
+  <body>
     <div id="progress-bar-container">
       <div id="progress-bar"></div>
     </div>
 
-    <header class="header">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-          <div class="d-flex align-items-center">
-            <img
-              src="assets/img/logo.jpg"
-              alt="Valorant Logo"
-              height="45"
-              class="d-inline-block align-text-top me-2 mobile-logo"
-            />
-            <span class="brand-text text-white mobile-brand"
-              >VALORANT AGENTS</span
-            >
+    <div class="hero-section">
+      <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid">
+            <div class="d-flex align-items-center">
+              <img
+                src="assets/img/vallogo.png"
+                alt="Valorant Logo"
+                height="45"
+                class="d-inline-block align-text-top me-2 mobile-logo"
+              />
+              <span class="brand-text text-white mobile-brand"
+                >VALORANT AGENTS</span
+              >
+            </div>
+            <div class="ms-auto">
+              <a
+                href="index.html"
+                class="btn btn-valorant me-2 text-white mobile-btn"
+              >
+                <i class="bi bi-house-door me-2"></i
+                ><span class="mobile-text">Home</span>
+              </a>
+              <a
+                href="search.html"
+                class="btn btn-outline-valorant text-white mobile-btn"
+              >
+                <i class="bi bi-search me-2"></i
+                ><span class="mobile-text">Search</span>
+              </a>
+            </div>
           </div>
-          <div class="ms-auto">
-            <a
-              href="index.html"
-              class="btn btn-valorant me-2 text-white mobile-btn"
-            >
-              <i class="bi bi-house-door me-2"></i
-              ><span class="mobile-text">Home</span>
-            </a>
-            <a
-              href="search.html"
-              class="btn btn-outline-valorant text-white mobile-btn"
-            >
-              <i class="bi bi-search me-2"></i
-              ><span class="mobile-text">Search</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
 
-    <main class="container py-5">
-      <div class="row mb-5">
-        <div class="col text-center">
-          <h1 class="page-title text-white">AGENTS GALLERY</h1>
-          <p class="page-subtitle text-white">
-            Select an agent to view detailed information
-          </p>
-        </div>
+      <div class="hero-content">
+        <main class="container py-5">
+          <div class="row mb-5">
+            <div class="col text-center">
+              <h1 class="page-title text-white">AGENTS GALLERY</h1>
+              <p class="page-subtitle text-white">
+                Select an agent to view detailed information
+              </p>
+            </div>
+          </div>
+          <div class="row" id="contentArea"></div>
+        </main>
       </div>
-      <div class="row" id="contentArea"></div>
-    </main>
+    </div>
 
     <footer class="footer">
       <div class="container">

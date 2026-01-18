@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -7,6 +7,8 @@
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
     <title>Valorant Agents</title>
+    <link rel="icon" href="assets/img/logo.png" type="image/png" />
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -34,7 +36,7 @@
           <div class="container-fluid">
             <div class="d-flex align-items-center">
               <img
-                src="assets/img/logo.jpg"
+                src="assets/img/vallogo.png"
                 alt="Valorant Logo"
                 height="45"
                 class="d-inline-block align-text-top me-2 logo-pulse mobile-logo"
@@ -103,7 +105,7 @@
       document.addEventListener("DOMContentLoaded", async () => {
         try {
           const response = await fetch(
-            "https://valorant-api.com/v1/agents?isPlayableCharacter=true"
+            "https://valorant-api.com/v1/agents?isPlayableCharacter=true",
           );
           const data = await response.json();
           document.getElementById("agentCount").textContent = data.data.length;
